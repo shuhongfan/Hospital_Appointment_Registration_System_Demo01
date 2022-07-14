@@ -1,0 +1,24 @@
+﻿
+谷粒学院和尚医通项目微信不能登录问题解决方式：
+
+1、问题描述
+（1）项目中微信扫描登录功能，目前不能生成微信扫描二维码
+
+2、问题出现原因
+（1）因为微信平台后台配置做了修改，把微信的回调路径修改了，所以之前的回调路径不能使用了
+
+3、解决方式
+（1）之前的配置是这样的
+ 微服务模块端口号是 8150
+ 项目配置文件
+wx.open.app_id=wxed9954c01bb89b47
+wx.open.app_secret=a7482517235173ddb4083788de60b90e
+wx.open.redirect_url=http://guli.shop/api/ucenter/wx/callback
+
+
+★（2）按照如下方式修改，就可以使用，其他不需要修改：
+★ 第一   修改项目启动端口号为 8160
+★ 第二步 把回调地址改为 wx.open.redirect_url=http://localhost:8160/api/ucenter/wx/callback
+
+★★ 说明：目前微信登录回调可以直接请求localhost地址了，所以修改了回调配置就是http://localhost:8160
+

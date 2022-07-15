@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Hospital_Appointment_Registration_System_Demo01.iml" filepath="$PROJECT_DIR$/.idea/Hospital_Appointment_Registration_System_Demo01.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mybatis_plus_demo/mybatis_plus_demo.iml" filepath="$PROJECT_DIR$/mybatis_plus_demo/mybatis_plus_demo.iml" />
     </modules>
   </component>
 </project>

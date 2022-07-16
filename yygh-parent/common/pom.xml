@@ -7,6 +7,14 @@
         <groupId>com.shf.yygh</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
+    <modules>
+        <module>common-util</module>
+        <module>service-util</module>
+    </modules>
+
+    <packaging>pom</packaging>
+
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>common</artifactId>

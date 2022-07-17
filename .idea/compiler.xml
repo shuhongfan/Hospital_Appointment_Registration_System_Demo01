@@ -8,12 +8,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="service-cmn" />
         <module name="common-util" />
+        <module name="service-user" />
+        <module name="mongodb-demo" />
         <module name="mybatis_plus_demo" />
         <module name="model" />
         <module name="service-hosp" />
         <module name="service-util" />
-        <module name="service-user" />
       </profile>
     </annotationProcessing>
   </component>
@@ -22,8 +24,10 @@
       <module name="common" options="-parameters" />
       <module name="common-util" options="-parameters" />
       <module name="model" options="-parameters" />
+      <module name="mongodb-demo" options="-parameters" />
       <module name="mybatis_plus_demo" options="-parameters" />
       <module name="service" options="-parameters" />
+      <module name="service-cmn" options="-parameters" />
       <module name="service-hosp" options="-parameters" />
       <module name="service-user" options="-parameters" />
       <module name="service-util" options="-parameters" />

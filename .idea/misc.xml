@@ -7,6 +7,7 @@
         <option value="$PROJECT_DIR$/mybatis_plus_demo/pom.xml" />
         <option value="$PROJECT_DIR$/yygh-parent/pom.xml" />
         <option value="$PROJECT_DIR$/yygh-parent/common/service-util/pom.xml" />
+        <option value="$PROJECT_DIR$/mongodb-demo/pom.xml" />
       </list>
     </option>
   </component>

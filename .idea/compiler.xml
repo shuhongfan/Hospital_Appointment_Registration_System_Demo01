@@ -16,6 +16,7 @@
         <module name="model" />
         <module name="service-hosp" />
         <module name="service-util" />
+        <module name="hospital-manage" />
       </profile>
     </annotationProcessing>
   </component>
@@ -23,6 +24,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common" options="-parameters" />
       <module name="common-util" options="-parameters" />
+      <module name="hospital-manage" options="-parameters" />
       <module name="model" options="-parameters" />
       <module name="mongodb-demo" options="-parameters" />
       <module name="mybatis_plus_demo" options="-parameters" />

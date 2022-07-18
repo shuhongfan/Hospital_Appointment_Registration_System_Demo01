@@ -80,6 +80,13 @@ export const constantRoutes = [
         component: () => import('@/views/hospSet/add'),
         meta: { title: '医院设置添加', icon: 'tree' },
         hidden: true
+      },
+      {
+        path: 'hospital/show/:id',
+        name: '查看',
+        component: () => import('@/views/hosp/show'),
+        meta: { title: '查看', noCache: true },
+        hidden: true
       }
     ]
   },
@@ -97,6 +104,23 @@ export const constantRoutes = [
         name: '数据字典',
         component: () => import('@/views/cmn/list'),
         meta: { title: '数据字典', icon: 'table' }
+      }
+    ]
+  },
+
+  {
+    path: '/hospital',
+    component: Layout,
+    redirect: '/cmn/list',
+    name: '医院管理',
+    meta: { title: '医院管理', icon: 'el-icon-s-help' },
+    alwaysShow: true,
+    children: [
+      {
+        path: 'list',
+        name: '医院列表',
+        component: () => import('@/views/hosp/list'),
+        meta: { title: '医院列表', icon: 'table' }
       }
     ]
   },

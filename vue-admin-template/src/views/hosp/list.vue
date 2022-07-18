@@ -76,6 +76,9 @@
           <router-link style="margin-right: 10px" :to="'/hospSet/hospital/show/'+scope.row.id">
             <el-button type="primary" size="mini">查看</el-button>
           </router-link>
+          <router-link style="margin-right: 10px" :to="'/hospSet/schedule/'+scope.row.hoscode">
+            <el-button type="primary" size="mini">排班</el-button>
+          </router-link>
 
           <el-button v-if="scope.row.status == 1" type="primary" size="mini" @click="updateStatus(scope.row.id, 0)">下线
           </el-button>

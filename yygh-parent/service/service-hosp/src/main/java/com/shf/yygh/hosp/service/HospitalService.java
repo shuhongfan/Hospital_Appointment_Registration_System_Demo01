@@ -32,4 +32,11 @@ public interface HospitalService {
      * @return
      */
     Map<String,Object> getHospById(String id);
+
+    /**
+     * 获取医院名称
+     * @param hoscode
+     * @return
+     */
+    String getHospName(String hoscode);
 }

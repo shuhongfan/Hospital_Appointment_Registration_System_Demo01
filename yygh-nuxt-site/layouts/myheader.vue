@@ -173,7 +173,6 @@ export default {
     // 微信登录回调处理
     let self = this;
     window["loginCallback"] = (name,token, openid) => {
-      debugger
       self.loginCallback(name, token, openid);
     }
   },
@@ -337,6 +336,7 @@ export default {
     weixinLogin() {
       this.dialogAtrr.showLoginType = 'weixin'
 
+      // 初始化微信相关参数
       weixinApi.getLoginParam().then(response => {
         var obj = new WxLogin({
           self_redirect:true,

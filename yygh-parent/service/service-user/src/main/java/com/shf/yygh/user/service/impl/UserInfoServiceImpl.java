@@ -9,6 +9,8 @@ import com.shf.yygh.model.user.UserInfo;
 import com.shf.yygh.user.mapper.UserInfoMapper;
 import com.shf.yygh.user.service.UserInfoService;
 import com.shf.yygh.vo.user.LoginVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -17,8 +19,16 @@ import java.util.Map;
 
 @Service
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements UserInfoService {
+
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
+
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+
     /**
      * 用户手机号登录接口
+     *
      * @param loginVo
      * @return
      */
@@ -34,18 +44,36 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         }
 
 //        判断手机验证码和输入的验证码是否一致
-        QueryWrapper<UserInfo> wrapper = new QueryWrapper<>();
-        wrapper.eq("phone", phone);
-        UserInfo userInfo = baseMapper.selectOne(wrapper);
+        String mobileCode = redisTemplate.opsForValue().get(phone);
+        if (!code.equals(mobileCode)) {
+            throw new YyghException(ResultCodeEnum.CODE_ERROR); // 验证码错误
+        }
 
+//        绑定手机号码
+        UserInfo userInfo = null;
+        if (!StringUtils.isEmpty(loginVo.getOpenid())) {
+            userInfo = getByOpenid(loginVo.getOpenid()); // 通过openid查找用户
+            if (null != userInfo) { // 用户存在
+                userInfo.setPhone(loginVo.getPhone()); // 设置用户手机号
+                updateById(userInfo); // 更新用户信息
+            } else {
+                throw new YyghException(ResultCodeEnum.DATA_ERROR);
+            }
+        }
+
+//        如果userinfo为空，进行正常的手机登录
 //        判断是否第一次登录：根据手机号查询数据库，如果不存在相同手机号就是第一次登录
-//        第一次使用手机号登录,创建新用户
-        if (userInfo == null) {
-            userInfo = new UserInfo();
-            userInfo.setName("");
-            userInfo.setPhone(phone);
-            userInfo.setStatus(1);
-            baseMapper.insert(userInfo);
+        if (null == userInfo) {
+            QueryWrapper<UserInfo> wrapper = new QueryWrapper<>();
+            wrapper.eq("phone", phone);
+            userInfo = userInfoMapper.selectOne(wrapper);
+            if (null == userInfo) { // 创建新用户
+                userInfo = new UserInfo();
+                userInfo.setName("");
+                userInfo.setPhone(phone);
+                userInfo.setStatus(1);
+                this.save(userInfo);
+            }
         }
 
 //        校验用户是否被禁用
@@ -75,5 +103,19 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         map.put("token", token);
 
         return map;
+    }
+
+    /**
+     * 根据openid查询用户信息
+     *
+     * @param openId
+     * @return
+     */
+    @Override
+    public UserInfo getByOpenid(String openId) {
+        QueryWrapper<UserInfo> wrapper = new QueryWrapper<>();
+        wrapper.eq("openid", openId);
+        UserInfo userInfo = baseMapper.selectOne(wrapper);
+        return userInfo;
     }
 }

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>service-user</artifactId>
+    <artifactId>service-msm</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -18,9 +18,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.shf.yygh</groupId>
-            <artifactId>service-cmn-client</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
         </dependency>
     </dependencies>
 

@@ -19,7 +19,7 @@ public enum ResultCodeEnum {
     PERMISSION(209, "没有权限"),
 
     CODE_ERROR(210, "验证码错误"),
-//    LOGIN_MOBLE_ERROR(211, "账号不正确"),
+    LOGIN_MOBLE_ERROR(211, "账号不正确"),
     LOGIN_DISABLED_ERROR(212, "改用户已被禁用"),
     REGISTER_MOBLE_ERROR(213, "手机号已被使用"),
     LOGIN_AURH(214, "需要登录"),
@@ -42,6 +42,8 @@ public enum ResultCodeEnum {
     SIGN_ERROR(300, "签名错误"),
     HOSPITAL_OPEN(310, "医院未开通，暂时不能访问"),
     HOSPITAL_LOCK(320, "医院被锁定，暂时不能访问"),
+
+    OSS_FAIL(333, "阿里云文件上传失败"),
     ;
 
     private Integer code;

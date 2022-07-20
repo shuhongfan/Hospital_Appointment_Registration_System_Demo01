@@ -8,17 +8,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="service-cmn" />
         <module name="common-util" />
-        <module name="service-msm" />
         <module name="service-gateway" />
         <module name="service-cmn-client" />
-        <module name="service-user" />
         <module name="mongodb-demo" />
         <module name="mybatis_plus_demo" />
-        <module name="model" />
+        <module name="service-oss" />
         <module name="service-hosp" />
         <module name="service-util" />
+        <module name="service-cmn" />
+        <module name="service-msm" />
+        <module name="service-user" />
+        <module name="model" />
         <module name="hospital-manage" />
       </profile>
     </annotationProcessing>
@@ -38,6 +39,7 @@
       <module name="service-gateway" options="-parameters" />
       <module name="service-hosp" options="-parameters" />
       <module name="service-msm" options="-parameters" />
+      <module name="service-oss" options="-parameters" />
       <module name="service-user" options="-parameters" />
       <module name="service-util" options="-parameters" />
       <module name="yygh-parent" options="-parameters" />

@@ -100,7 +100,6 @@ export default {
 
   methods: {
     fetchDataById() {
-      debugger
       patientApi.getById(this.$route.query.id).then(response => {
         this.patient = response.data
       })

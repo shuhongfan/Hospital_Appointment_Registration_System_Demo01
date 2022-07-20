@@ -1,7 +1,5 @@
 package com.shf.yygh.common.utils;
 
-
-
 import com.shf.yygh.common.helper.JwtHelper;
 
 import javax.servlet.http.HttpServletRequest;

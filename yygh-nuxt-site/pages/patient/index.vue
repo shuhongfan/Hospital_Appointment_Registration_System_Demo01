@@ -34,12 +34,12 @@
               <div>
                 <span class="name">{{ item.name }}</span>
                 <span>{{ item.certificatesNo }} {{ item.param.certificatesTypeString }}</span>
-                <div  class="detail" @click="show(item.id)"> 查看详情 <span  class="iconfont"></span></div>
+                <div class="detail" @click="show(item.id)"> 查看详情 <span class="iconfont"></span></div>
               </div>
             </div>
             <div class="card SELF_PAY_CARD">
               <div class="info">
-                <span class="type">{{ item.isInsure == 0 ? '自费' : '医保'}}</span>
+                <span class="type">{{ item.isInsure == 0 ? '自费' : '医保' }}</span>
                 <span class="card-no">{{ item.certificatesNo }}</span>
                 <span class="card-view">{{ item.param.certificatesTypeString }}</span>
               </div>
@@ -99,16 +99,17 @@ export default {
 }
 </script>
 <style>
-  .header-wrapper .title {
-    font-size: 16px;
-    margin-top: 0;
-  }
+.header-wrapper .title {
+  font-size: 16px;
+  margin-top: 0;
+}
 
-  .content-wrapper {
-    margin-left: 0;
-  }
-  .patient-card .el-card__header .detail{
-    font-size: 14px;
-  }
+.content-wrapper {
+  margin-left: 0;
+}
+
+.patient-card .el-card__header .detail {
+  font-size: 14px;
+}
 
 </style>

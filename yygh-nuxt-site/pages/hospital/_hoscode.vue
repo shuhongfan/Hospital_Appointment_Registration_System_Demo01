@@ -146,7 +146,7 @@ export default {
         return
       }
 
-      //判断认证
+      //判断用户是否完成认证
       userInfoApi.getUserInfo().then(response => {
         let authStatus = response.data.authStatus
         // 状态为2认证通过

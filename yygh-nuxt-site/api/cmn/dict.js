@@ -12,7 +12,7 @@ export default {
 
   findByParentId(parentId) {
     return request({
-      url: `${api_name}/findByParentId/${parentId}`,
+      url: `${api_name}/findChildData/${parentId}`,
       method: 'get'
     })
   }

@@ -32,14 +32,14 @@ export default {
       method: 'get'
     })
   },
-
+  // 可预约信息分页
   getBookingScheduleRule(page, limit, hoscode, depcode) {
     return request({
       url: `${api_name}/auth/getBookingScheduleRule/${page}/${limit}/${hoscode}/${depcode}`,
       method: 'get'
     })
   },
-
+ // 获取可预约的排班信息
   findScheduleList(hoscode, depcode, workDate) {
     return request({
       url: `${api_name}/auth/findScheduleList/${hoscode}/${depcode}/${workDate}`,

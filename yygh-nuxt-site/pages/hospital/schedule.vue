@@ -313,7 +313,6 @@ export default {
     },
 
     booking(scheduleId, availableNumber) {
-      debugger
       if(availableNumber == 0 || this.pageFirstStatus == -1) {
         this.$message.error('不能预约')
       } else {

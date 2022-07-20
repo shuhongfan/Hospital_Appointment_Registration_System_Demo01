@@ -143,4 +143,15 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
         return null;
     }
+
+    /**
+     * 获取部门
+     * @param hoscode
+     * @param depcode
+     * @return
+     */
+    @Override
+    public Department getDepartment(String hoscode, String depcode) {
+        return departmentRepository.getDepartmentByHoscodeAndDepcode(hoscode, depcode);
+    }
 }

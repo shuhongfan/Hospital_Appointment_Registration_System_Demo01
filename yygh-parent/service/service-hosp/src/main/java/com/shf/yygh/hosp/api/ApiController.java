@@ -1,4 +1,4 @@
-package com.shf.yygh.hosp.controller.api;
+package com.shf.yygh.hosp.api;
 
 
 

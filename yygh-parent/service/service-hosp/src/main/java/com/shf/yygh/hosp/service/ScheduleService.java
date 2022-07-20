@@ -32,4 +32,21 @@ public interface ScheduleService {
      * @return
      */
     List<Schedule> getDetailSchedule(String hoscode, String depcode, String workDate);
+
+    /**
+     * 获取可预约排班数据
+     * @param page
+     * @param limit
+     * @param hoscode
+     * @param depcode
+     * @return
+     */
+    Map<String, Object> getBookingScheduleRule(Integer page, Integer limit, String hoscode, String depcode);
+
+    /**
+     * 根据排班id获取排班数据
+     * @param scheduleId
+     * @return
+     */
+    Schedule getById(String scheduleId);
 }

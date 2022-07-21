@@ -52,7 +52,9 @@
                 <div class="content"><span>{{ orderInfo.patientName }}</span></div>
               </el-form-item>
               <el-form-item label="就诊日期：">
-                <div class="content"><span>{{ orderInfo.reserveDate }} {{ orderInfo.reserveTime == 0 ? '上午' : '下午' }}</span></div>
+                <div class="content"><span>{{ orderInfo.reserveDate }} {{
+                    orderInfo.reserveTime == 0 ? '上午' : '下午'
+                  }}</span></div>
               </el-form-item>
               <el-form-item label="就诊医院：">
                 <div class="content"><span>{{ orderInfo.hosname }} </span></div>
@@ -100,7 +102,8 @@
     <!-- 右侧内容 #end -->
 
     <!-- 微信支付弹出框 -->
-    <el-dialog :visible.sync="dialogPayVisible" style="text-align: left" :append-to-body="true" width="500px" @close="closeDialog">
+    <el-dialog :visible.sync="dialogPayVisible" style="text-align: left" :append-to-body="true" width="500px"
+               @close="closeDialog">
       <div class="container">
 
         <div class="operate-view" style="height: 350px;">
@@ -128,6 +131,7 @@ import '~/assets/css/hospital.css'
 
 import orderInfoApi from '@/api/order/orderInfo'
 import weixinApi from '@/api/order/weixin'
+
 export default {
 
   data() {
@@ -138,7 +142,9 @@ export default {
       },
 
       dialogPayVisible: false,
-      payObj: {},
+      payObj: {
+        codeUrl: ""
+      },
       timer: null  // 定时器名称
     }
   },
@@ -173,12 +179,13 @@ export default {
       })
     },
 
+    // 生成支付二维码
     pay() {
       this.dialogPayVisible = true
 
       weixinApi.createNative(this.orderId).then(response => {
         this.payObj = response.data
-        if(this.payObj.codeUrl == '') {
+        if (this.payObj.codeUrl == '') {
           this.dialogPayVisible = false
           this.$message.error("支付错误")
         } else {
@@ -191,7 +198,6 @@ export default {
 
     queryPayStatus(orderId) {
       weixinApi.queryPayStatus(orderId).then(response => {
-        debugger
         if (response.message == '支付中') {
           return
         }
@@ -201,8 +207,7 @@ export default {
     },
 
     closeDialog() {
-      debugger
-      if(this.timer) {
+      if (this.timer) {
         clearInterval(this.timer);
       }
     }
@@ -210,30 +215,31 @@ export default {
 }
 </script>
 <style>
-  .info-wrapper {
-    padding-left: 0;
-    padding-top: 0;
-  }
+.info-wrapper {
+  padding-left: 0;
+  padding-top: 0;
+}
 
-  .content-wrapper {
-    color: #333;
-    font-size: 14px;
-    padding-bottom: 0;
-  }
+.content-wrapper {
+  color: #333;
+  font-size: 14px;
+  padding-bottom: 0;
+}
 
-  .bottom-wrapper {
-    width: 100%;
-  }
+.bottom-wrapper {
+  width: 100%;
+}
 
-  .button-wrapper {
-    margin: 0;
+.button-wrapper {
+  margin: 0;
 
-  }
-  .el-form-item {
-    margin-bottom: 5px;
-  }
+}
 
-  .bottom-wrapper .button-wrapper {
-    margin-top: 0;
-  }
+.el-form-item {
+  margin-bottom: 5px;
+}
+
+.bottom-wrapper .button-wrapper {
+  margin-top: 0;
+}
 </style>

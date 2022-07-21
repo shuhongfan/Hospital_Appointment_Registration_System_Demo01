@@ -2,5 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shf.yygh.order.mapper.OrderInfoMapper">
-
+<!--    查询预约统计数据的方法-->
+    <select id="selectOrderCount" resultType="com.shf.yygh.vo.order.OrderCountVo">
+        select count(*) as count,reserve_date as reserveDate from order_info
+        <where>
+            <if test="vo.hosname != null and vo.hosname != ''">
+                and hosname like CONCAT('%',#{vo.hosname},'%')
+            </if>
+            <if test="vo.reserveDateBegin != null and vo.reserveDateBegin != ''">
+                and reserve_date >= #{vo.reserveDateBegin}
+            </if>
+            <if test="vo.reserveDateEnd != null and vo.reserveDateEnd != ''">
+                and reserve_date &lt;= #{vo.reserveDateEnd}
+            </if>
+            and is_deleted = 0
+        </where>
+        group by reserve_date
+        order by reserve_date
+    </select>
 </mapper>

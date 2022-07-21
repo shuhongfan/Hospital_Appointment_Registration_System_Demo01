@@ -14,6 +14,7 @@
         <module>service-cmn-client</module>
         <module>service-user-client</module>
         <module>service-hosp-client</module>
+        <module>service-order-client</module>
     </modules>
 
     <artifactId>service-client</artifactId>

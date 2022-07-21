@@ -12,7 +12,9 @@
         <module name="service-gateway" />
         <module name="service-cmn-client" />
         <module name="mongodb-demo" />
+        <module name="service-order-client" />
         <module name="service-user-client" />
+        <module name="service-task" />
         <module name="service-hosp-client" />
         <module name="mybatis_plus_demo" />
         <module name="service-oss" />
@@ -22,6 +24,7 @@
         <module name="service-cmn" />
         <module name="service-msm" />
         <module name="service-user" />
+        <module name="service-statistics" />
         <module name="rabbit-util" />
         <module name="model" />
         <module name="hospital-manage" />
@@ -46,7 +49,10 @@
       <module name="service-hosp-client" options="-parameters" />
       <module name="service-msm" options="-parameters" />
       <module name="service-order" options="-parameters" />
+      <module name="service-order-client" options="-parameters" />
       <module name="service-oss" options="-parameters" />
+      <module name="service-statistics" options="-parameters" />
+      <module name="service-task" options="-parameters" />
       <module name="service-user" options="-parameters" />
       <module name="service-user-client" options="-parameters" />
       <module name="service-util" options="-parameters" />

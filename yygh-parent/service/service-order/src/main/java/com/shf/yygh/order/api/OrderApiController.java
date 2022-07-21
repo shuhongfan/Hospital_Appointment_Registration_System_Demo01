@@ -8,6 +8,7 @@ import com.shf.yygh.enums.OrderStatusEnum;
 import com.shf.yygh.model.order.OrderInfo;
 import com.shf.yygh.order.service.OrderService;
 import com.shf.yygh.vo.hosp.ScheduleOrderVo;
+import com.shf.yygh.vo.order.OrderCountQueryVo;
 import com.shf.yygh.vo.order.OrderQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Api(tags = "订单接口")
 @RestController
@@ -54,12 +56,21 @@ public class OrderApiController {
         return Result.ok(pageModel);
     }
 
+    /**
+     * 获取订单状态
+     * @return
+     */
     @ApiOperation(value = "获取订单状态")
     @GetMapping("auth/getStatusList")
     public Result getStatusList() {
         return Result.ok(OrderStatusEnum.getStatusList());
     }
 
+    /**
+     * 取消预约
+     * @param orderId
+     * @return
+     */
     @ApiOperation(value = "取消预约")
     @GetMapping("auth/cancelOrder/{orderId}")
     public Result cancelOrder(
@@ -67,6 +78,17 @@ public class OrderApiController {
             @PathVariable("orderId") Long orderId) {
         Boolean cancelOrder = orderService.cancelOrder(orderId);
         return Result.ok(cancelOrder);
+    }
+
+    /**
+     * 获取订单统计数据
+     * @param orderCountQueryVo
+     * @return
+     */
+    @ApiOperation(value = "获取订单统计数据")
+    @PostMapping("inner/getCountMap")
+    public Map<String, Object> getCountMap(@RequestBody OrderCountQueryVo orderCountQueryVo) {
+        return orderService.getCountMap(orderCountQueryVo);
     }
 
 }

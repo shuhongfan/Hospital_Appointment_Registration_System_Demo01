@@ -20,19 +20,15 @@ import com.shf.yygh.order.service.WeixinService;
 import com.shf.yygh.user.client.PatientFeignClient;
 import com.shf.yygh.vo.hosp.ScheduleOrderVo;
 import com.shf.yygh.vo.msm.MsmVo;
-import com.shf.yygh.vo.order.OrderMqVo;
-import com.shf.yygh.vo.order.OrderQueryVo;
-import com.shf.yygh.vo.order.SignInfoVo;
+import com.shf.yygh.vo.order.*;
 import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> implements OrderService {
@@ -303,6 +299,54 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
         }
         return true;
 
+    }
+
+    /**
+     * 就诊提醒
+     */
+    @Override
+    public void patientTips() {
+        QueryWrapper<OrderInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("reserve_date",new DateTime().toString("yyyy-MM-dd"));
+        List<OrderInfo> orderInfoList = baseMapper.selectList(queryWrapper);
+
+        for(OrderInfo orderInfo : orderInfoList) {
+            //短信提示
+            MsmVo msmVo = new MsmVo();
+            msmVo.setPhone(orderInfo.getPatientPhone());
+            String reserveDate = new DateTime(orderInfo.getReserveDate()).toString("yyyy-MM-dd") + (orderInfo.getReserveTime()==0 ? "上午": "下午");
+            Map<String,Object> param = new HashMap<String,Object>(){{
+                put("title", orderInfo.getHosname()+"|"+orderInfo.getDepname()+"|"+orderInfo.getTitle());
+                put("reserveDate", reserveDate);
+                put("name", orderInfo.getPatientName());
+            }};
+            msmVo.setParam(param);
+            rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_MSM, MqConst.ROUTING_MSM_ITEM, msmVo);
+        }
+    }
+
+    /**
+     * 预约统计
+     *
+     * @param orderCountQueryVo
+     * @return
+     */
+    @Override
+    public Map<String, Object> getCountMap(OrderCountQueryVo orderCountQueryVo) {
+//        调用mapper方法得到数据
+        List<OrderCountVo> orderCountVoList = baseMapper.selectOrderCount(orderCountQueryVo);
+
+//        获取x需要数据，日期数据，list集合
+        List<String> dateList = orderCountVoList.stream().map(OrderCountVo::getReserveDate).collect(Collectors.toList());
+
+//        获取y需要数据，具体数量，list集合
+        List<Integer> countList = orderCountVoList.stream().map(OrderCountVo::getCount).collect(Collectors.toList());
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("dataList", dateList);
+        map.put("countList", countList);
+
+        return map;
     }
 
     /**

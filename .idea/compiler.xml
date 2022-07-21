@@ -12,13 +12,17 @@
         <module name="service-gateway" />
         <module name="service-cmn-client" />
         <module name="mongodb-demo" />
+        <module name="service-user-client" />
+        <module name="service-hosp-client" />
         <module name="mybatis_plus_demo" />
         <module name="service-oss" />
         <module name="service-hosp" />
         <module name="service-util" />
+        <module name="service-order" />
         <module name="service-cmn" />
         <module name="service-msm" />
         <module name="service-user" />
+        <module name="rabbit-util" />
         <module name="model" />
         <module name="hospital-manage" />
       </profile>
@@ -32,15 +36,19 @@
       <module name="model" options="-parameters" />
       <module name="mongodb-demo" options="-parameters" />
       <module name="mybatis_plus_demo" options="-parameters" />
+      <module name="rabbit-util" options="-parameters" />
       <module name="service" options="-parameters" />
       <module name="service-client" options="-parameters" />
       <module name="service-cmn" options="-parameters" />
       <module name="service-cmn-client" options="-parameters" />
       <module name="service-gateway" options="-parameters" />
       <module name="service-hosp" options="-parameters" />
+      <module name="service-hosp-client" options="-parameters" />
       <module name="service-msm" options="-parameters" />
+      <module name="service-order" options="-parameters" />
       <module name="service-oss" options="-parameters" />
       <module name="service-user" options="-parameters" />
+      <module name="service-user-client" options="-parameters" />
       <module name="service-util" options="-parameters" />
       <module name="yygh-parent" options="-parameters" />
     </option>

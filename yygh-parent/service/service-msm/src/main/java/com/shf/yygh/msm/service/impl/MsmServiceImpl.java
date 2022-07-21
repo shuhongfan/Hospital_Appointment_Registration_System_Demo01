@@ -12,6 +12,7 @@ import com.aliyuncs.profile.DefaultProfile;
 
 import com.shf.yygh.msm.service.MsmService;
 import com.shf.yygh.msm.utils.ConstantPropertiesUtils;
+import com.shf.yygh.vo.msm.MsmVo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -22,6 +23,7 @@ import java.util.Map;
 public class MsmServiceImpl implements MsmService {
     /**
      * 发送验证码
+     *
      * @param phone
      * @param code
      * @return
@@ -53,8 +55,8 @@ public class MsmServiceImpl implements MsmService {
         //模板code
         request.putQueryParameter("TemplateCode", "SMS_154950909");
         //验证码  使用json格式   {"code":"123456"}
-        Map<String,Object> param = new HashMap();
-        param.put("code",code);
+        Map<String, Object> param = new HashMap();
+        param.put("code", code);
         request.putQueryParameter("TemplateParam", JSONObject.toJSONString(param));
 
         //调用方法进行短信发送
@@ -66,6 +68,22 @@ public class MsmServiceImpl implements MsmService {
             e.printStackTrace();
         } catch (ClientException e) {
             e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * mq发送短信
+     *
+     * @param msmVo
+     * @return
+     */
+    @Override
+    public boolean send(MsmVo msmVo) {
+        if (!StringUtils.isEmpty(msmVo.getPhone())) {
+            String code = (String) msmVo.getParam().get("code");
+            boolean isSend = this.send(msmVo.getPhone(), code);
+            return isSend;
         }
         return false;
     }

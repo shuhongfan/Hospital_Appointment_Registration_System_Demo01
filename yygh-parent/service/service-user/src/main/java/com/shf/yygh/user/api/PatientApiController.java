@@ -50,11 +50,17 @@ public class PatientApiController {
         return Result.ok();
     }
 
-//    删除就诊人
+    //    删除就诊人
     @DeleteMapping("auth/remove/{id}")
     public Result removePatient(@PathVariable long id) {
         patientService.removeById(id);
         return Result.ok();
     }
 
+    //根据就诊人id获取就诊人信息
+    @GetMapping("inner/get/{id}")
+    public Patient getPatientOrder(@PathVariable Long id) {
+        Patient patient = patientService.getPatientId(id);
+        return patient;
+    }
 }

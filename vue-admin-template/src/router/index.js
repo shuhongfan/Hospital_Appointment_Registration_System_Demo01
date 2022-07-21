@@ -163,6 +163,32 @@ export const constantRoutes = [
   },
 
   {
+    path: '/order',
+    component: Layout,
+    redirect: '/order/orderInfo/list',
+    name: 'BasesInfo',
+    meta: { title: '订单管理', icon: 'table' },
+    alwaysShow: true,
+    children: [
+      {
+        path: 'orderInfo/list',
+        name: '订单列表',
+        component: () => import('@/views/order/orderInfo/list'),
+        meta: { title: '订单列表' }
+      },
+      {
+        path: 'orderInfo/show/:id',
+        name: '查看',
+        component: () =>import('@/views/order/orderInfo/show'),
+        meta: { title: '查看', noCache: true },
+        hidden: true
+      }
+
+    ]
+  },
+
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',

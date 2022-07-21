@@ -1,13 +1,15 @@
 package com.shf.yygh.hosp.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.shf.yygh.model.hosp.Schedule;
+import com.shf.yygh.vo.hosp.ScheduleOrderVo;
 import com.shf.yygh.vo.hosp.ScheduleQueryVo;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Map;
 
-public interface ScheduleService {
+public interface ScheduleService extends IService<Schedule> {
     void save(Map<String, Object> paramMap);
 
     Page<Schedule> selectPage(int page, int limit, ScheduleQueryVo scheduleQueryVo);
@@ -49,4 +51,17 @@ public interface ScheduleService {
      * @return
      */
     Schedule getById(String scheduleId);
+
+    /**
+     * 根据排班id获取预约下单数据
+     * @param scheduleId
+     * @return
+     */
+    ScheduleOrderVo getScheduleOrderVo(String scheduleId);
+
+    /**
+     * 更新排班数据
+     * @param schedule
+     */
+    void update(Schedule schedule);
 }

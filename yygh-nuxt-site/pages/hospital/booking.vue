@@ -201,7 +201,7 @@ export default {
       this.activeIndex = index;
       this.patient = this.patientList[index]
     },
-
+    // 提交订单
     submitOrder() {
       if(this.patient.id == null) {
         this.$message.error('请选择就诊人')
